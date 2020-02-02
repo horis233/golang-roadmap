@@ -1,0 +1,16 @@
+syntax = "proto3" ;
+
+package prototext ;
+
+message Test{
+// Name
+    string name = 1;
+// Weight
+    repeated int32 weight = 2 ;
+// Height
+    int32 height =3 ;
+// Motto
+    string motto = 4 ;
+}
+
+
