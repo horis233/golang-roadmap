@@ -1,0 +1,34 @@
+syntax = "proto3" ;
+
+package myproto ;
+
+
+//Define Name
+
+service Helloserver{
+    //Function to say hello
+    rpc Sayhello(HelloReq)returns(HelloRsp){}
+    //Function to say name
+    rpc Sayname(NameReq)returns(NameRsp){}
+}
+
+//client send to server
+message  HelloReq{
+    string name = 1 ;
+}
+
+//server return to client
+message HelloRsp{
+    string msg =1 ;
+}
+
+//client send to server
+message NameReq{
+    string name = 1 ;
+
+}
+
+//server return to client
+message NameRsp{
+    string msg =1 ;
+}
