@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/micro/go-micro/v2/client"
-	web "path/to/service/proto/web"
+	web "github.com/horis233/golang-roadmap/day2/micro/rpc/web"
 )
 
 func WebCall(w http.ResponseWriter, r *http.Request) {
