@@ -1,10 +1,11 @@
 package main
 
 import (
-        log "github.com/micro/go-micro/v2/logger"
-	      "net/http"
-        "github.com/micro/go-micro/v2/web"
-        "micro/rpc/web/handler"
+        "github.com/micro/go-log"
+	"net/http"
+
+        "github.com/micro/go-web"
+        "day2/micro/rpc/web/handler"
 )
 
 func main() {
@@ -12,6 +13,7 @@ func main() {
         service := web.NewService(
                 web.Name("go.micro.web.web"),
                 web.Version("latest"),
+                web.Address(":8080"),
         )
 
 	// initialise service
@@ -23,7 +25,7 @@ func main() {
 	service.Handle("/", http.FileServer(http.Dir("html")))
 
 	// register call handler
-	service.HandleFunc("/web/call", handler.WebCall)
+	service.HandleFunc("/example/call", handler.ExampleCall)
 
 	// run service
         if err := service.Run(); err != nil {

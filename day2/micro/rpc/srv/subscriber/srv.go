@@ -2,19 +2,19 @@ package subscriber
 
 import (
 	"context"
-	log "github.com/micro/go-micro/v2/logger"
+	"github.com/micro/go-log"
 
-	srv "micro/rpc/srv/proto/srv"
+	example "day2/micro/rpc/srv/proto/example"
 )
 
-type Srv struct{}
+type Example struct{}
 
-func (e *Srv) Handle(ctx context.Context, msg *srv.Message) error {
-	log.Info("Handler Received message: ", msg.Say)
+func (e *Example) Handle(ctx context.Context, msg *example.Message) error {
+	log.Log("Handler Received message: ", msg.Say)
 	return nil
 }
 
-func Handler(ctx context.Context, msg *srv.Message) error {
-	log.Info("Function Received message: ", msg.Say)
+func Handler(ctx context.Context, msg *example.Message) error {
+	log.Log("Function Received message: ", msg.Say)
 	return nil
 }

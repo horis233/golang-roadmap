@@ -6,11 +6,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/micro/go-micro/v2/client"
-	web "github.com/horis233/golang-roadmap/day2/micro/rpc/web"
+	"github.com/micro/go-micro/client"
+	//example "github.com/micro/examples/template/srv/proto/example"
+	example "day2/micro/rpc/srv/proto/example"
 )
 
-func WebCall(w http.ResponseWriter, r *http.Request) {
+func ExampleCall(w http.ResponseWriter, r *http.Request) {
 	// decode the incoming request as json
 	var request map[string]interface{}
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
@@ -19,8 +20,9 @@ func WebCall(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// call the backend service
-	webClient := web.NewWebService("go.micro.service.web", client.DefaultClient)
-	rsp, err := webClient.Call(context.TODO(), &web.Request{
+	exampleClient := example.NewExampleService("go.micro.srv.srv", client.DefaultClient)
+
+	rsp, err := exampleClient.Call(context.TODO(), &example.Request{
 		Name: request["name"].(string),
 	})
 	if err != nil {

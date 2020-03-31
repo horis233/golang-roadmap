@@ -1,18 +1,18 @@
 package main
 
 import (
-	log "github.com/micro/go-micro/v2/logger"
-	"github.com/micro/go-micro/v2"
-	"micro/rpc/srv/handler"
-	"micro/rpc/srv/subscriber"
+	"github.com/micro/go-log"
+	"github.com/micro/go-micro"
+	"day2/micro/rpc/srv/handler"
+	"day2/micro/rpc/srv/subscriber"
 
-	srv "micro/rpc/srv/proto/srv"
+	example "day2/micro/rpc/srv/proto/example"
 )
 
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.service.srv"),
+		micro.Name("go.micro.srv.srv"),
 		micro.Version("latest"),
 	)
 
@@ -20,10 +20,13 @@ func main() {
 	service.Init()
 
 	// Register Handler
-	srv.RegisterSrvHandler(service.Server(), new(handler.Srv))
+	example.RegisterExampleHandler(service.Server(), new(handler.Example))
 
 	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.srv", service.Server(), new(subscriber.Srv))
+	micro.RegisterSubscriber("go.micro.srv.srv", service.Server(), new(subscriber.Example))
+
+	// Register Function as Subscriber
+	micro.RegisterSubscriber("go.micro.srv.srv", service.Server(), subscriber.Handler)
 
 	// Run service
 	if err := service.Run(); err != nil {
