@@ -82,20 +82,20 @@ func (this * MinStack) GetMin() int {
 [evaluate-reverse-polish-notation]
 
 > **Polish expression calculation**> **Input:** [“ 2”, “1”,“ +”, “3”,“ *”]> **Output:** 9
-> **Explanation:** ((2+1)\*3) = 9
+> **Explanation:** ((2+1)*3) = 9
 
 Method: Save the original element through the stack, encounter the expression increment operation, then push the result, repeat this process
 
 ```go
 func evalRPN (token[] string) int {
-    If len (tokens) == 0 {
+    if len (tokens) == 0 {
         Returns 0
     }
-    Stack: = make([] int, 0)
-    For i: = 0; i <len (tokens); i ++ {
-        Switch token [i] {
-        Case "+", "-", "*", "/":
-            If len(stack)<2 {
+    stack: = make([] int, 0)
+    for i: = 0; i <len (tokens); i ++ {
+        switch token [i] {
+        case "+", "-", "*", "/":
+            if len(stack)<2 {
                 Returns -1
             }
             //Note: a is the dividend, b is the divisor
@@ -103,14 +103,14 @@ func evalRPN (token[] string) int {
             a: = stack [len(stack)-2]
             stack = stack [:len(stack)-2]
             var result int
-            Switch token [i] {
-            Situation "+":
-                Result = a + b
-            Case "-":
+            switch token [i] {
+            case "+":
+                result = a + b
+            case "-":
                 Result = a-b
-            Case "*":
+            case "*":
                 Result = a * b
-            Case "/":
+            case "/":
                 Result = a/b
             }
             stack = append (stack, result)
@@ -120,16 +120,16 @@ func evalRPN (token[] string) int {
             stack = append(stack, val)
         }
     }
-    Return to stack [0]
+    return stack [0]
 }
 ```
 
 [Decode String]
 
 > Given an encoded string, return the decoded string.
-> s = "3 [a] 2 [bc]", return" aaabcbc".
-> s = "3 [a2 [c]]", return "accaccacc".
-> s = "2 [abc] 3 [cd] ef", return" abcabccdcdcdef".
+> s = "3[a]2[bc]", return" aaabcbc".
+> s = "3[a2[c]]", return "accaccacc".
+> s = "2[abc]3[cd] ef", return" abcabccdcdcdef".
 
 Method: operation through stack assistance
 
@@ -176,22 +176,22 @@ func decodeString(s string) string {
 Recursive DFS search template using stack
 
 ```go
-Boolean DFS (int root, int target) {
-    Set <Node> has been visited;
-    Stack <Node> s;
-    Add root to s;
-    And (s is not empty){
-        Node cur = top element in s;
-        If cur is the target, it returns true;
-        For (node ​​next: cur neighbor) {
-            If (the next one is not visited){
-                Add next to s;
-                Add next to the interviewee;
+boolean DFS(int root, int target) {
+    Set<Node> visited;
+    Stack<Node> s;
+    add root to s;
+    while (s is not empty) {
+        Node cur = the top element in s;
+        return true if cur is target;
+        for (Node next : the neighbors of cur) {
+            if (next is not in visited) {
+                add next to s;
+                add next to visited;
             }
         }
-        Remove cur from s
+        remove cur from s;
     }
-    Return false;
+    return false;
 }
 ```
 
@@ -288,16 +288,12 @@ func dfs(grid [][]byte,i,j int)int{
 
 [largest-rectangle-in-histogram]
 
-> Given _n_ non-negative integers, used to represent the height of each column in the histogram. Each pillar is adjacent to each other and has a width of 1.
+> Given n non-negative integers, used to represent the height of each column in the histogram. Each pillar is adjacent to each other and has a width of 1.
 > Find the maximum area of ​​the rectangle that can be outlined in this histogram.
 
 Method: Find the area with the current column as the height, which is converted to find the left and right values ​​that are less than the current value
 
-![image.png](https://img.fuiboom.com/img/stack_rain.png)
-
 Use the stack to save the left element less than the current value
-
-![image.png](https://img.fuiboom.com/img/stack_rain2.png)
 
 ```go
 func largestRectangleArea(heights []int) int {
