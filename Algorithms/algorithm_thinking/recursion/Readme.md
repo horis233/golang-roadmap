@@ -12,18 +12,18 @@ Turn big problems into small problems and solve each small problem in turn throu
 
 ```go
 func reverseString(s []byte) {
-res := make([]byte, 0)
-reverse(s, 0, &res)
-for i := 0; i <len(s); i++ {
-s[i] = res[i]
-}
+    res := make([]byte, 0)
+    reverse(s, 0, &res)
+    for i := 0; i <len(s); i++ {
+        s[i] = res[i]
+    }
 }
 func reverse(s []byte, i int, res *[]byte) {
-if i == len(s) {
-return
-}
-reverse(s, i+1, res)
-*res = append(*res, s[i])
+    if i == len(s) {
+        return
+    }
+    reverse(s, i+1, res)
+    *res = append(*res, s[i])
 }
 ```
 
